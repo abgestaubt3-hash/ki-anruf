@@ -1,0 +1,15 @@
+/* app/globals.css */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #111;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+input, select, button {
+  font: inherit;
+}
