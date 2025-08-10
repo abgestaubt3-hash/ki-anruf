@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { bunnyUploadFromBuffer } from "@/lib/storage";
 
 export const runtime = "nodejs";
 
@@ -10,7 +11,6 @@ export async function POST(req: NextRequest) {
     if (file.size > 25 * 1024 * 1024) return NextResponse.json({ error: "File too large (max 25MB)" }, { status: 400 });
 
     const buf = Buffer.from(await file.arrayBuffer());
-    const { bunnyUploadFromBuffer } = await import("@/lib/storage");
     const { publicUrl } = await bunnyUploadFromBuffer(buf, file.name);
     return NextResponse.json({ publicUrl });
   } catch (e:any) {

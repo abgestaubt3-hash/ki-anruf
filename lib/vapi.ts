@@ -35,9 +35,6 @@ export async function startOutboundCall(input: StartCallInput) {
     },
     body: JSON.stringify(body),
   });
-  if (!res.ok) {
-    const t = await res.text();
-    throw new Error("Vapi call failed: " + t);
-  }
+  if (!res.ok) throw new Error("Vapi call failed: " + await res.text());
   return await res.json();
 }

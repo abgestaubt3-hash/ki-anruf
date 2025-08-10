@@ -11,10 +11,7 @@ export default function Home() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!file || !phone || !agree) {
-      alert('Bitte alle Felder ausfüllen und Zustimmung anhaken.');
-      return;
-    }
+    if (!file || !phone || !agree) { alert('Bitte alles ausfüllen.'); return; }
     setLoading(true);
     try {
       const fd = new FormData();
@@ -32,7 +29,7 @@ export default function Home() {
       if (data.error) throw new Error(data.error);
       window.location.href = data.checkoutUrl;
     } catch (err:any) {
-      alert(err.message || 'Fehler beim Start');
+      alert(err.message || 'Fehler');
     } finally {
       setLoading(false);
     }

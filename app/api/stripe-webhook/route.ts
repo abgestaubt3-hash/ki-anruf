@@ -21,16 +21,14 @@ export async function POST(req: NextRequest) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const orderId = session.metadata?.order_id!;
-    const pkg = session.metadata?.pkg!;
     const minutes = Number(session.metadata?.minutes || 10);
     const phone = session.metadata?.phone!;
     const audioUrl = session.metadata?.audioUrl!;
 
     try {
-      const order = await getOrder(orderId);
+      await getOrder(orderId); // ensure exists
       const voiceId = await ensureElevenLabsVoice(orderId, audioUrl);
 
-      // Optional: dynamischer Prompt-Override (hier nur Beispielvariablen)
       const systemPrompt = process.env.VAPI_SYSTEM_PROMPT || undefined;
       await startOutboundCall({
         to: phone,

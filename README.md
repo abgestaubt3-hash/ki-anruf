@@ -1,11 +1,9 @@
-# KI-Anruf – Next.js MVP
+# KI-Anruf – Next.js MVP (Bunny + Stripe + Supabase + ElevenLabs + Vapi)
 
-## Setup
-1. Env-Variablen setzen (.env oder Vercel Project Settings)
-2. `npm install`
-3. `npm run dev` (lokal) oder bei Vercel deployen
+## Env Variablen
+Siehe `.env.example` und trage sie in Vercel unter Project → Settings → Environment Variables ein.
 
-## API Fluss
-- POST /api/upload → nimmt FormData(file) und lädt zu Bunny (gibt publicUrl zurück)
-- POST /api/checkout → erstellt Stripe-Checkout-Session und speichert Order
-- POST /api/stripe-webhook → nach Zahlung: ElevenLabs Voice klonen & Vapi-Call starten
+## Flow
+- /api/upload: Datei → Bunny (public URL)
+- /api/checkout: Stripe Checkout Session
+- /api/stripe-webhook: Nach Zahlung → ElevenLabs Clone → Vapi Outbound Call
